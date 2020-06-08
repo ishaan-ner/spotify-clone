@@ -1,0 +1,663 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap");
+
+$greyDarkest: #010101;
+$greyDark: #050505;
+$greyLight: #121212;
+$greyLightest: #292929;
+$greyText: #b3b3b3;
+$greenMain: #1db954;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  list-style-type: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  background-color: $greyLight;
+}
+
+button {
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1.76px;
+  border: 2px solid transparent;
+  padding: 8px 34px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50px;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+h2 {
+  color: white;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.07rem;
+  line-height: 28px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.outer-wrap {
+  height: 100vh;
+  min-height: 100%;
+}
+
+.grid-container {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 60px 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    " side-bar top-bar"
+    " side-bar main-window"
+    "bottom-bar bottom-bar";
+}
+
+.top-bar {
+  grid-area: top-bar;
+  background-color: $greyDark;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+
+  .buttons {
+    width: 300px;
+    height: 38px;
+    margin-left: auto;
+    margin-right: 1rem;
+    button {
+      font-size: 12px;
+      background-color: inherit;
+      line-height: 18px;
+      color: white;
+      margin: 0 0.5rem;
+
+      &.selected {
+        color: black;
+        background-color: white;
+      }
+    }
+  }
+}
+
+.side-bar {
+  grid-area: side-bar;
+  background-color: $greyDarkest;
+  width: 230px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: $greyText;
+
+  .logo {
+    color: white;
+    padding: 1.5rem 0 1rem 1.5rem;
+
+    svg {
+      max-width: 130px;
+    }
+  }
+
+  ul {
+    a {
+      color: $greyText;
+      &:hover {
+        color: white;
+      }
+      &.active {
+        background: $greyLightest;
+        color: white;
+      }
+    }
+    li {
+      height: 40px;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      p {
+        margin-left: 1rem;
+        display: inline;
+      }
+    }
+  }
+  .nav-item-wrapper {
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .cookies {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 2rem;
+    a {
+      display: block;
+      text-decoration: none;
+      padding: 0.5rem;
+      font-size: 12px;
+      color: inherit;
+    }
+    hr {
+      width: 1rem;
+      margin: 0 auto;
+      border: 0.5px solid;
+    }
+  }
+}
+
+.main-window {
+  grid-area: main-window;
+  background: $greyLight;
+  overflow: auto;
+}
+
+.main-grid {
+  display: grid;
+  grid-gap: 32px;
+  padding: 16px 32px;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+  }
+}
+
+.section-grid {
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-rows: 0;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+  min-height: inherit;
+
+  .section-heading {
+    grid-column: 1/-1;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    a:first-child {
+      flex-grow: 1;
+      flex-shrink: 0;
+      flex-basis: 90%;
+      display: block;
+    }
+
+    span,
+    a {
+      color: $greyText;
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 16px 20px;
+  height: 100%;
+  width: 100%;
+  background-color: $greyLightest;
+  border-radius: 8px;
+  a {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    .card-play-button {
+      display: block;
+    }
+  }
+
+  .img-container {
+    margin-bottom: 16px;
+    width: 100%;
+    padding-top: 100%;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+    img {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  .card-title {
+    width: 100%;
+    height: 100%;
+    min-height: 62px;
+
+    h4 {
+      color: white;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-all;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    span {
+      margin-top: 4px;
+      font-size: 11px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      color: $greyText;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .card-play-button {
+    display: none;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    button {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      background-color: $greenMain;
+      color: white;
+    }
+  }
+}
+
+.bottom-bar {
+  grid-area: bottom-bar;
+
+  .signup-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 76px;
+    padding: 11px 24px 7px 15px;
+    background-image: linear-gradient(90deg, #af2896, #509bf5);
+    .signup-banner-text {
+      margin-left: 24px;
+      color: white;
+      p {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      p:nth-child(1) {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+    }
+
+    button {
+      color: #509bf5;
+      background-color: white;
+      padding: 8px 48px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .music-controls {
+    background-color: $greyLightest;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $greyText;
+    width: 224px;
+    i {
+      font-size: 0.9rem;
+      &:hover {
+        color: white;
+      }
+    }
+    .fa-play-circle {
+      font-size: 2rem;
+    }
+  }
+  .progress-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    hr {
+      width: 25rem;
+      border: 2px solid #535353;
+    }
+    p {
+      color: $greyText;
+      font-size: 11px;
+      margin: 0 1rem;
+    }
+  }
+}
+
+.search-categories-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.search-categories {
+  padding: 2rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-auto-rows: auto;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+
+  h2 {
+    grid-column: 1/-1;
+  }
+  .search-category {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    padding-top: 100%;
+    background-image: linear-gradient(to bottom right, $greyLightest, #e06cde);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    .search-category-content {
+      position: absolute;
+      top: 0;
+      padding: 1rem;
+      span {
+        font-size: 1.3rem;
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.playlist-view {
+  background-color: $greyLight;
+  .playlist-banner {
+    display: flex;
+    height: 280px;
+    padding: 2rem 3rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    }
+    .playlist-banner-txt {
+      display: flex;
+      flex-direction: column;
+      margin-left: 2rem;
+      justify-content: space-between;
+      color: white;
+      width: 100%;
+      height: 100%;
+      h1 {
+        letter-spacing: -0.3rem;
+        font-size: 5.5rem;
+        line-height: 5.5rem;
+      }
+      h2 {
+        color: $greyText;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+      p {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .playlist-controls {
+    height: 6rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 3rem;
+
+    button {
+      color: white;
+      background-color: $greenMain;
+      border-radius: 500px;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      width: 56px;
+      height: 56px;
+      margin-right: 2rem;
+    }
+    i {
+      color: $greyText;
+      font-size: 2rem;
+      margin-right: 2rem;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+.playlist-list {
+  padding: 0 3rem;
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    list-style-type: none;
+    li {
+      position: relative;
+      display: flex;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      height: 4.5rem;
+      transition: 0.2s;
+      i {
+        position: absolute;
+        color: $greyText;
+        top: 1rem;
+        &:nth-child(2) {
+          display: none;
+        }
+      }
+      &:hover {
+        background-color: $greyLightest;
+        i {
+          display: none;
+          &:nth-child(2) {
+            display: block;
+            color: white;
+          }
+        }
+      }
+      span {
+        color: $greyText;
+      }
+    }
+    .playlist-track-song {
+      margin-left: 2rem;
+      width: 100%;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 2rem;
+      h3 {
+        color: white;
+
+        font-size: 0.9rem;
+      }
+      p {
+        color: $greyText;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.genre-view {
+  padding: 2rem;
+}
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-image: url(https://open.scdn.co/cdn/images/improved-modal-bg.23e5dcb1.jpg);
+  background-size: 100% 100%;
+  width: 50rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.33);
+  padding: 65px 50px 50px 50px;
+  display: flex;
+  color: white;
+
+  div {
+    width: 50%;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    h1 {
+      font-size: 3rem;
+      line-height: 3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-top: 20px;
+      li {
+        margin: 10px 0 0 15px;
+        font-size: 1rem;
+      }
+    }
+
+    &:nth-child(2) {
+      align-items: center;
+      background-color: white;
+      justify-content: space-evenly;
+      margin-bottom: 10rem;
+      border-radius: 12px;
+
+      hr {
+        width: 80%;
+      }
+
+      p {
+        color: black;
+      }
+
+      button {
+        border: 1px solid black;
+        width: 240px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        padding: 1rem;
+        font-weight: 700;
+        &:first-child {
+          background-color: $greenMain;
+          color: white;
+          border: $greenMain;
+        }
+      }
+    }
+  }
+
+  .close-modal {
+    margin-top: 2rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    width: 50px;
+    letter-spacing: 1px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: 1335px) {
+  .playlist-view .playlist-banner .playlist-banner-txt {
+    justify-content: center;
+    h1 {
+      font-size: 3rem;
+      line-height: 3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 985px) {
+  .playlist-view .playlist-banner .playlist-banner-txt {
+    h1 {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+  }
+}
